@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-odinbook-dark: #125e9d;
+  --color-odinbook-altDark: #7892bc;
+  --color-odinbook-light: #f3faff;
+  --color-odinbook-altLight: #f1f1e6;
+}
