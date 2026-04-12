@@ -3,6 +3,7 @@
 
 @import "tailwindcss";
 
+/* TODO create light and dark modes */
 @layer base {
   body {
     @apply bg-odinbook-light;
