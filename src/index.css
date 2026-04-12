@@ -3,10 +3,12 @@
 
 @import "tailwindcss";
 
-/* TODO create light and dark modes */
 @layer base {
   body {
     @apply bg-odinbook-light;
+    @apply text-black;
+    @apply dark:bg-black;
+    @apply dark:text-odinbook-light;
     font-family: var(--font-body);
   }
   h1 {
