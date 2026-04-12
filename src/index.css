@@ -7,8 +7,8 @@
   body {
     @apply bg-odinbook-light;
     @apply text-black;
-    @apply dark:bg-black;
-    @apply dark:text-odinbook-light;
+    @apply dark:bg-darkmode-dark;
+    @apply dark:text-odinbook-light/60;
     font-family: var(--font-body);
   }
   h1 {
@@ -25,6 +25,12 @@
   }
 }
 
+@layer components {
+  .icons {
+    @apply dark:text-odinbook-light;
+  }
+}
+
 @theme {
   --font-logo: "Architects Daughter", cursive;
   --font-body: "Nunito Sans", sans-serif;
@@ -32,4 +38,6 @@
   --color-odinbook-altDark: #7892bc;
   --color-odinbook-light: #f3faff;
   --color-odinbook-altLight: #f1f1e6;
+  --color-darkmode-dark: #121212;
+  --color-darkmode-altDark: #212121;
 }
