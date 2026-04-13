@@ -16,22 +16,22 @@ function Header() {
     >
       <div className="mx-2 flex justify-between items-center">
         <div className="flex gap-x-2 items-center">
-          <FontAwesomeIcon icon={faBars} size="lg" />
-          <img src={logoNoName} alt="Odin Book name without logo" width={175} />
+          <FontAwesomeIcon icon={faBars} size="xl" />
+          <img src={logoNoName} alt="Odin Book name without logo" width={150} />
         </div>
         <Link to={"#newPost"}>
-          <FontAwesomeIcon icon={faSquarePlus} size="lg" />
+          <FontAwesomeIcon icon={faSquarePlus} size="xl" />
         </Link>
       </div>
-      <div className="mt-4 pb-1 flex justify-evenly border-b border-odinbook-altDark/45">
+      <div className="mt-4 pb-2 flex justify-evenly border-b border-odinbook-altDark/45">
         <Link to={"/"}>
-          <FontAwesomeIcon icon={faHouse} size="lg" />
+          <FontAwesomeIcon icon={faHouse} size="xl" />
         </Link>
         <Link to={"#users"}>
-          <FontAwesomeIcon icon={faUserGroup} size="lg" />
+          <FontAwesomeIcon icon={faUserGroup} size="xl" />
         </Link>
         <Link to={"#profile"}>
-          <FontAwesomeIcon icon={faCircleUser} size="lg" />
+          <FontAwesomeIcon icon={faCircleUser} size="xl" />
         </Link>
       </div>
     </header>
