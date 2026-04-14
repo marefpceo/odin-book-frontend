@@ -27,10 +27,10 @@ function Header({ handleOpen }) {
         <Link to={"/"}>
           <FontAwesomeIcon icon={faHouse} size="xl" />
         </Link>
-        <Link to={"#users"}>
+        <Link to={"/users"}>
           <FontAwesomeIcon icon={faUserGroup} size="xl" />
         </Link>
-        <Link to={"#profile"}>
+        <Link to={"/profile"}>
           <FontAwesomeIcon icon={faCircleUser} size="xl" />
         </Link>
       </div>
