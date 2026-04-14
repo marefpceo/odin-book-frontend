@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faBars, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 
-function Header() {
+function Header({ handleOpen }) {
   return (
     <header
       className="pt-1 dark:border-b-odinbook-altDark/25 dark:border-b dark:shadow-[0_-5px_10px] 
@@ -16,7 +16,7 @@ function Header() {
     >
       <div className="mx-2 flex justify-between items-center">
         <div className="flex gap-x-2 items-center">
-          <FontAwesomeIcon icon={faBars} size="xl" />
+          <FontAwesomeIcon icon={faBars} size="xl" onClick={handleOpen} />
           <img src={logoNoName} alt="Odin Book name without logo" width={150} />
         </div>
         <Link to={"#newPost"}>
