@@ -9,45 +9,52 @@ function Login() {
   }
 
   return (
-    <div
-      role="main"
-      className="relative h-dvh p-2 flex flex-col justify-evenly"
-    >
-      <img
-        src={logo}
-        alt="Odin Book logo"
-        width={100}
-        className="absolute self-center top-20"
+    <>
+      <title>Odin Book | Log in</title>
+      <meta
+        name="description"
+        content="Welcome to the Odin Book. Log in to catch up on what you have missed!"
       />
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col flex-1 justify-center gap-y-4"
+      <div
+        role="main"
+        className="relative h-dvh p-2 flex flex-col justify-evenly"
       >
-        <input type="text" name="email" id="email" placeholder="Email" />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
+        <img
+          src={logo}
+          alt="Odin Book logo"
+          width={100}
+          className="absolute self-center top-20"
         />
-        <Button
-          text={"Log in"}
-          style={
-            "w-full h-10 text-odinbook-light bg-odinbook-dark z-50 self-center rounded-3xl dark:bg-odinbook-dark"
-          }
-        />
-      </form>
-      <span className="pb-8">
-        <Link to={"/signup"}>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col flex-1 justify-center gap-y-4"
+        >
+          <input type="text" name="email" id="email" placeholder="Email" />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
           <Button
-            text={"Create new account"}
+            text={"Log in"}
             style={
-              "w-full h-10 text-odinbook-dark bg-odinbook-light border border-odinbook-dark z-50 self-center rounded-3xl dark:bg-darkmode-dark dark:text-odinbook-altDark"
+              "w-full h-10 text-odinbook-light bg-odinbook-dark z-50 self-center rounded-3xl dark:bg-odinbook-dark"
             }
           />
-        </Link>
-      </span>
-    </div>
+        </form>
+        <span className="pb-8">
+          <Link to={"/signup"}>
+            <Button
+              text={"Create new account"}
+              style={
+                "w-full h-10 text-odinbook-dark bg-odinbook-light border border-odinbook-dark z-50 self-center rounded-3xl dark:bg-darkmode-dark dark:text-odinbook-altDark"
+              }
+            />
+          </Link>
+        </span>
+      </div>
+    </>
   );
 }
 
