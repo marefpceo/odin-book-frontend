@@ -54,7 +54,12 @@ function MobileMenu({ isOpen, handleClose }) {
             </Link>
           </span>
         </div>
-        <Button text={"Log out"} />
+        <Button
+          text={"Log out"}
+          style={
+            "w-full h-10 text-odinbook-light bg-odinbook-altDark z-50 self-center rounded-md dark:bg-darkmode-altDark"
+          }
+        />
       </div>
     </div>
   );

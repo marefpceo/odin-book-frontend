@@ -23,6 +23,18 @@
     font-size: var(--text-lg);
     font-family: var(--font-log);
   }
+  input {
+    @apply border;
+    @apply rounded-xl;
+    @apply border-odinbook-altDark;
+    @apply h-11;
+    @apply p-2;
+    @apply outline-0;
+    @apply focus:border-2;
+    @apply focus:border-odinbook-dark;
+    @apply focus:ring-odinbook-dark;
+    @apply placeholder-odinbook-dark;
+  }
 }
 
 @layer components {

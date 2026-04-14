@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import MobileMenu from "./components/MobileMenu";
 
 // TODO creating posts and comments should be using with modal
-// TODO 3 main index files for nav - Home/Posts | Users | Profile
+
 function App({ isAuthenticated }) {
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
