@@ -7,6 +7,7 @@ function Home() {
     <section role="main" className="home">
       {cards.map((card) => (
         <Card
+          key={card.id}
           postAuthor={card.author}
           postContent={card.content}
           likes={card.likes}
