@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { Outlet } from "react-router";
+import { Navigate, Outlet } from "react-router";
 import Header from "./components/Header";
 import MobileMenu from "./components/MobileMenu";
 
 // TODO creating posts and comments should be using with modal
 // TODO 3 main index files for nav - Home/Posts | Users | Profile
-function App() {
+function App({ isAuthenticated }) {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
   const [isOpen, setIsOpen] = useState(false);
 
   function handleOpen() {
