@@ -11,7 +11,7 @@ import { faBars, faUserGroup } from "@fortawesome/free-solid-svg-icons";
 function Header({ handleOpen }) {
   return (
     <header
-      className="pt-1 dark:border-b-odinbook-altDark/25 dark:border-b dark:shadow-[0_-5px_10px] 
+      className="pt-4 dark:border-b-odinbook-altDark/25 dark:border-b dark:shadow-[0_-5px_10px] 
       dark:shadow-odinbook-light"
     >
       <div className="mx-2 flex justify-between items-center">
