@@ -1,11 +1,34 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import Button from "../components/Button";
 import logo from "../assets/odin-book-logo.png";
 
+import userLogin from "../api/apiAuthServices";
+
 function Login() {
+  const [loginInput, setLoginInput] = useState({
+    email: "",
+    password: "",
+  });
+
+  async function loginUser(input) {
+    const response = await userLogin(input.email, input.password);
+
+    console.log(response.ok);
+  }
+
+  function handleChange(e) {
+    const value = e.target.value;
+    setLoginInput((prevData) => ({
+      ...prevData,
+      [e.target.name]: value,
+    }));
+  }
+
   function handleSubmit(e) {
     // logic to submit login form
     e.preventDefault();
+    loginUser(loginInput);
   }
 
   return (
@@ -29,12 +52,19 @@ function Login() {
           onSubmit={handleSubmit}
           className="flex flex-col flex-1 justify-center gap-y-4"
         >
-          <input type="text" name="email" id="email" placeholder="Email" />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            onChange={handleChange}
+          />
           <input
             type="password"
             name="password"
             id="password"
             placeholder="Password"
+            onChange={handleChange}
           />
           <Button
             text={"Log in"}

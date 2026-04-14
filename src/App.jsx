@@ -5,7 +5,7 @@ import MobileMenu from "./components/MobileMenu";
 
 // TODO creating posts and comments should be using with modal
 
-function App({ isAuthenticated }) {
+function App() {
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
