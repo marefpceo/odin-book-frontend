@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, replace, useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthProvider";
 import Button from "../components/Button";
@@ -12,9 +12,11 @@ function Login() {
     password: "",
   });
 
-  if (isAuthenticated) {
-    navigate("/", replace);
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/", replace);
+    }
+  }, [isAuthenticated]);
 
   function handleChange(e) {
     const value = e.target.value;

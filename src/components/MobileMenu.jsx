@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { Link, replace, useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthProvider";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
@@ -9,9 +10,16 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 function MobileMenu({ isOpen, handleClose }) {
+  const navigate = useNavigate();
+  const { logoutUser } = useAuth();
   // Prevents child div from triggering parent click event
   function preventClick(e) {
     e.stopPropagation();
+  }
+
+  function handleClick() {
+    logoutUser();
+    navigate("/login", replace);
   }
 
   return (
@@ -59,6 +67,7 @@ function MobileMenu({ isOpen, handleClose }) {
           style={
             "w-full h-10 text-odinbook-light bg-odinbook-altDark z-50 self-center rounded-md dark:bg-darkmode-altDark"
           }
+          handleClick={handleClick}
         />
       </div>
     </div>
