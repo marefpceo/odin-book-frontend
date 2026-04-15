@@ -1,21 +1,20 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, replace, useNavigate } from "react-router";
+import { useAuth } from "../contexts/AuthProvider";
 import Button from "../components/Button";
 import logo from "../assets/odin-book-logo.png";
 
-import userLogin from "../api/apiAuthServices";
-
 function Login() {
+  const navigate = useNavigate();
+  const { loginUser, isAuthenticated } = useAuth();
   const [loginInput, setLoginInput] = useState({
     email: "",
     password: "",
   });
 
-  // async function loginUser(input) {
-  //   const response = await userLogin(input.email, input.password);
-
-  //   console.log(response.ok);
-  // }
+  if (isAuthenticated) {
+    navigate("/", replace);
+  }
 
   function handleChange(e) {
     const value = e.target.value;
@@ -28,7 +27,7 @@ function Login() {
   function handleSubmit(e) {
     // logic to submit login form
     e.preventDefault();
-    // loginUser(loginInput);
+    loginUser(loginInput);
   }
 
   return (

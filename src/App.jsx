@@ -34,15 +34,13 @@ function App() {
   }
 
   return (
-    <AuthProvider>
-      <div className="relative grid-rows-[auto_1fr]">
-        <MobileMenu isOpen={isOpen} handleClose={handleClose} />
-        <Header handleOpen={handleOpen} />
-        <div className="h-lvh">
-          <Outlet />
-        </div>
+    <div className="relative grid-rows-[auto_1fr]">
+      <MobileMenu isOpen={isOpen} handleClose={handleClose} />
+      <Header handleOpen={handleOpen} />
+      <div className="h-lvh">
+        <Outlet />
       </div>
-    </AuthProvider>
+    </div>
   );
 }
 

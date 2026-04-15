@@ -1,15 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import { validateSession, userLogout } from "../api/apiAuthServices";
 import userLogin from "../api/apiAuthServices";
 
 const AuthContext = createContext();
-function useAuth() {
-  return useContext(AuthContext);
-}
+
+const useAuth = () => useContext(AuthContext);
 
 function AuthProvider({ children }) {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -39,7 +36,6 @@ function AuthProvider({ children }) {
     if (response.ok && response.status === 200) {
       setUser(responseData.user);
       setIsAuthenticated(responseData.isAuthenticated);
-      navigate("/", { replace: true });
     } else {
       return;
     }

@@ -13,7 +13,7 @@ function Router() {
     { path: "/login", element: <Login /> },
     { path: "/signup", element: <SignUp /> },
     {
-      element: <App isAuthenticated={false} />,
+      element: <App />,
       ErrorBoundary: ErrorBoundary,
       children: [
         { index: true, element: <Home /> },
