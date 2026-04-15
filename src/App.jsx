@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Navigate, Outlet } from "react-router";
+import { AuthProvider, useAuth } from "./contexts/AuthProvider";
 import Header from "./components/Header";
 import MobileMenu from "./components/MobileMenu";
 
 // TODO creating posts and comments should be using with modal
 
 function App() {
+  const { user, isAuthenticated } = useAuth();
+
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
@@ -31,13 +34,15 @@ function App() {
   }
 
   return (
-    <div className="relative grid-rows-[auto_1fr]">
-      <MobileMenu isOpen={isOpen} handleClose={handleClose} />
-      <Header handleOpen={handleOpen} />
-      <div className="h-lvh">
-        <Outlet />
+    <AuthProvider>
+      <div className="relative grid-rows-[auto_1fr]">
+        <MobileMenu isOpen={isOpen} handleClose={handleClose} />
+        <Header handleOpen={handleOpen} />
+        <div className="h-lvh">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </AuthProvider>
   );
 }
 

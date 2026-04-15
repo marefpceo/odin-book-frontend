@@ -11,11 +11,11 @@ function Login() {
     password: "",
   });
 
-  async function loginUser(input) {
-    const response = await userLogin(input.email, input.password);
+  // async function loginUser(input) {
+  //   const response = await userLogin(input.email, input.password);
 
-    console.log(response.ok);
-  }
+  //   console.log(response.ok);
+  // }
 
   function handleChange(e) {
     const value = e.target.value;
@@ -28,7 +28,7 @@ function Login() {
   function handleSubmit(e) {
     // logic to submit login form
     e.preventDefault();
-    loginUser(loginInput);
+    // loginUser(loginInput);
   }
 
   return (
