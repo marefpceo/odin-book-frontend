@@ -1,17 +1,38 @@
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
+import { useAuth } from "../contexts/AuthProvider";
+import { getPosts } from "../api/apiPostServices";
 
 import cards from "../../cardObjects"; // Remove after
 
 function Home() {
+  const { user } = useAuth();
+  const [postList, setPostList] = useState([]);
+
+  useEffect(() => {
+    async function getPostsService() {
+      const response = await getPosts(user.id);
+
+      const responseData = await response.json();
+      if (response.status === 200) {
+        setPostList(responseData.feedPosts);
+        console.log(postList);
+      } else {
+        return;
+      }
+    }
+    getPostsService();
+  }, [user]);
+
   return (
     <section role="main" className="home">
-      {cards.map((card) => (
+      {postList.map((card) => (
         <Card
           key={card.id}
-          postAuthor={card.author}
+          postAuthor={card.user.username}
           postContent={card.content}
-          likes={card.likes}
-          commentCount={card.comments}
+          likes={card._count.likes}
+          commentCount={card.comment.length}
         />
       ))}
     </section>
