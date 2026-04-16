@@ -3,8 +3,6 @@ import Card from "../components/Card";
 import { useAuth } from "../contexts/AuthProvider";
 import { getPosts } from "../api/apiPostServices";
 
-import cards from "../../cardObjects"; // Remove after
-
 function Home() {
   const { user } = useAuth();
   const [postList, setPostList] = useState([]);
