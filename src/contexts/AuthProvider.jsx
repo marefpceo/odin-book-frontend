@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { Navigate } from "react-router";
 import { validateSession, userLogout } from "../api/apiAuthServices";
 import userLogin from "../api/apiAuthServices";
 
@@ -47,7 +48,7 @@ function AuthProvider({ children }) {
     if (response.ok) {
       setUser(null);
       setIsAuthenticated(false);
-      setLoading(true);
+      return <Navigate to={"/login"} replace />;
     } else {
       return;
     }
