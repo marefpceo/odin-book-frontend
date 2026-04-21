@@ -61,7 +61,7 @@ function Profile() {
           <h2>Bio</h2>
           <Button
             text={!isEditMode ? 'Edit Bio' : 'Save'}
-            style={`w-20 h-8 text-odinbook-light bg-odinbook-dark z-50 self-center rounded-md 
+            style={`w-20 h-8 text-odinbook-light bg-odinbook-dark self-center rounded-md 
               dark:bg-darkmode-altDark ${user.id !== profileInfo.id ? 'hidden' : ''}`}
             handleClick={handleClick}
           />
