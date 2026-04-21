@@ -1,14 +1,13 @@
 import { Link } from "react-router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp, faComment } from "@fortawesome/free-regular-svg-icons";
 
-function Card({ postAuthor, postContent, likes, commentCount }) {
+function Card({ postAuthor, postContent, likes, commentCount, avatar }) {
   return (
     <div className="p-2 w-full border-b border-odinbook-dark rounded-xs dark:border-darkmode-altDark">
       <div>
         <Link to={"#selectedProfile"} className="flex gap-x-3 items-center">
-          <FontAwesomeIcon icon={faCircleUser} size="2xl" />
+          {avatar}
           <p className="font-bold">{postAuthor}</p>
         </Link>
       </div>
