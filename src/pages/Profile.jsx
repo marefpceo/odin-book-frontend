@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthProvider';
 import { getProfile, updateProfile } from '../api/apiProfileServices';
 import Button from '../components/Button';
+import FileUploadButton from '../components/FileUploadButton';
 
 import Avvvatars from 'avvvatars-react';
 
@@ -51,7 +52,13 @@ function Profile() {
   return (
     <section className='p-2'>
       <div className='pt-6 flex flex-col justify-center items-center gap-y-8'>
-        <Avvvatars value={user.email} size={75} />
+        <span className='relative'>
+          <Avvvatars value={user.email} size={120} />
+          <FileUploadButton
+            customStyle={`p-0.5 absolute -bottom-1.5 -right-1 rounded-full border-2 border-odinbook-dark
+              bg-odinbook-light ${user.id !== profileInfo.id ? 'hidden' : ''}`}
+          />
+        </span>
         <h1>
           {profileInfo.firstname} {profileInfo.lastname}'s Profile
         </h1>
