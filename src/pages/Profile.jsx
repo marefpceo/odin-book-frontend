@@ -8,7 +8,7 @@ import Avvvatars from 'avvvatars-react';
 function Profile() {
   const { user } = useAuth();
   const [profileInfo, setProfileInfo] = useState('');
-  const [bio, setBio] = useState('');
+  const [bio, setBio] = useState();
   const [isEditMode, setIsEditMode] = useState(false);
 
   useEffect(() => {
@@ -18,6 +18,7 @@ function Profile() {
       const responseData = await response.json();
       if (response.status === 200) {
         setProfileInfo(responseData);
+        setBio(responseData.bio);
       }
     }
     getProfileService();
@@ -35,15 +36,12 @@ function Profile() {
   // Handles click and conditionally submit changes if bio has been updated.
   function handleClick() {
     if (isEditMode === false) {
-      setBio(profileInfo.bio);
       setIsEditMode(true);
     }
 
     if (isEditMode === true) {
-      if (profileInfo.bio !== bio) {
-        updateProfileService();
-        console.log('Update profile');
-      }
+      updateProfileService();
+      console.log('Update profile');
       setIsEditMode(false);
     }
   }
@@ -65,21 +63,21 @@ function Profile() {
           <h2>Bio</h2>
           <Button
             text={!isEditMode ? 'Edit Bio' : 'Save'}
-            style={
-              'w-20 h-8 text-odinbook-light bg-odinbook-dark z-50 self-center rounded-md dark:bg-darkmode-altDark'
-            }
+            style={`w-20 h-8 text-odinbook-light bg-odinbook-dark z-50 self-center rounded-md 
+              dark:bg-darkmode-altDark ${user.id !== profileInfo.id ? 'hidden' : ''}`}
             handleClick={handleClick}
           />
         </span>
         {isEditMode === false ? (
-          <p className='mt-4 indent-5'>{profileInfo.bio}</p>
+          <p className='mt-4 indent-5'>{bio}</p>
         ) : (
           <textarea
             name='bio'
             id='bio'
             value={bio}
             rows={5}
-            className='mt-4 w-full p-2 rounded border border-odinbook-altDark'
+            className='mt-4 w-full p-2 rounded 
+              border border-odinbook-altDark'
             onChange={handleChange}
           ></textarea>
         )}
