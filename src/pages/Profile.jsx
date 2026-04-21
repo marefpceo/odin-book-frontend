@@ -29,7 +29,6 @@ function Profile() {
 
     const responseData = await response.json();
     if (response.status === 200) {
-      console.log('Profile updated');
     }
   }
 
@@ -41,7 +40,6 @@ function Profile() {
 
     if (isEditMode === true) {
       updateProfileService();
-      console.log('Update profile');
       setIsEditMode(false);
     }
   }
