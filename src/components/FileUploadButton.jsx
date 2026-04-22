@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
-function FileUploadButton({ customStyle }) {
+function FileUploadButton({ customStyle, handleChange }) {
   const fileInputRef = useRef(null);
 
   function handleClick() {
@@ -21,11 +21,12 @@ function FileUploadButton({ customStyle }) {
 
       <input
         type='file'
-        name='avatarUpload'
-        id='avatarUpload'
+        name='avatar'
+        id='avatar'
         ref={fileInputRef}
         style={{ display: 'none' }}
-        onChange={(e) => console.log(e.target.files[0])}
+        onChange={handleChange}
+        accept='image/*'
       />
     </>
   );

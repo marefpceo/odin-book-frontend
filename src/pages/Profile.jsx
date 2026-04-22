@@ -11,6 +11,7 @@ function Profile() {
   const [profileInfo, setProfileInfo] = useState('');
   const [bio, setBio] = useState();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [avatarInput, setAvatarInput] = useState();
 
   useEffect(() => {
     async function getProfileService() {
@@ -49,16 +50,26 @@ function Profile() {
     setBio(e.target.value);
   }
 
+  function handleFileChange(e) {
+    setAvatarInput(e.target.files[0]);
+  }
+
   return (
     <section className='p-2'>
       <div className='pt-6 flex flex-col justify-center items-center gap-y-8'>
         <span className='relative'>
           <Avvvatars value={user.email} size={120} />
           <FileUploadButton
+            handleChange={handleFileChange}
             customStyle={`p-0.5 absolute -bottom-1.5 -right-1 rounded-full border-2 border-odinbook-dark
               bg-odinbook-light ${user.id !== profileInfo.id ? 'hidden' : ''}`}
           />
         </span>
+        <sub
+          className={`italic text-red-500 ${user.id !== profileInfo.id ? 'hidden' : ''}`}
+        >
+          *Max image 250x250px 2MB or less.
+        </sub>
         <h1>
           {profileInfo.firstname} {profileInfo.lastname}'s Profile
         </h1>
