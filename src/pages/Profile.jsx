@@ -7,11 +7,11 @@ import FileUploadButton from '../components/FileUploadButton';
 import Avvvatars from 'avvvatars-react';
 
 function Profile() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [profileInfo, setProfileInfo] = useState('');
-  const [bio, setBio] = useState();
+  const [bio, setBio] = useState('');
   const [isEditMode, setIsEditMode] = useState(false);
-  const [avatarInput, setAvatarInput] = useState();
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
   useEffect(() => {
     async function getProfileService() {
@@ -21,6 +21,7 @@ function Profile() {
       if (response.status === 200) {
         setProfileInfo(responseData);
         setBio(responseData.bio);
+        setAvatarUrl(responseData.avatar);
       }
     }
     getProfileService();
@@ -50,20 +51,31 @@ function Profile() {
     setBio(e.target.value);
   }
 
-  function handleFileChange(e) {
-    setAvatarInput(e.target.files[0]);
-  }
-
   return (
     <section className='p-2'>
       <div className='pt-6 flex flex-col justify-center items-center gap-y-8'>
         <span className='relative'>
-          <Avvvatars value={user.email} size={120} />
-          <FileUploadButton
-            handleChange={handleFileChange}
-            customStyle={`p-0.5 absolute -bottom-1.5 -right-1 rounded-full border-2 border-odinbook-dark
-              bg-odinbook-light ${user.id !== profileInfo.id ? 'hidden' : ''}`}
-          />
+          {user.avatar === (null || 'NULL') ? (
+            <Avvvatars value={user.email} size={150} />
+          ) : loading ? (
+            <p className='w-36 h-36'></p>
+          ) : (
+            <img
+              src={avatarUrl}
+              alt='User profile avatar'
+              width={150}
+              height={150}
+              loading='lazy'
+            />
+          )}
+          <form encType='multipart/form-data'>
+            <FileUploadButton
+              setAvatarUrl={setAvatarUrl}
+              profileId={user.profile}
+              customStyle={`p-0.5 absolute -bottom-1.5 -right-1 rounded-full border-2 border-odinbook-dark
+                bg-odinbook-light ${user.id !== profileInfo.id ? 'hidden' : ''}`}
+            />
+          </form>
         </span>
         <sub
           className={`italic text-red-500 ${user.id !== profileInfo.id ? 'hidden' : ''}`}

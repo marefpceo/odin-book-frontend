@@ -38,3 +38,20 @@ export async function updateProfile(profileId, updatedBio) {
     throw error;
   }
 }
+
+export async function updateAvatar(profileId, uploadedFile) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/profile/${profileId}/update`,
+      {
+        method: 'PUT',
+        credentials: 'include',
+        body: uploadedFile,
+      },
+    );
+    return response;
+  } catch (error) {
+    console.error('Error uploading avatar', error);
+    throw error;
+  }
+}
