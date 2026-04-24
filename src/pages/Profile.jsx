@@ -28,7 +28,10 @@ function Profile() {
   }, [user]);
 
   async function updateProfileService() {
-    const response = await updateProfile(user.profile, bio);
+    const formData = new FormData();
+    formData.append('bio', bio);
+
+    const response = await updateProfile(user.profile, formData);
 
     const responseData = await response.json();
     if (response.status === 200) {

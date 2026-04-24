@@ -17,41 +17,19 @@ export async function getProfile(profileId) {
   }
 }
 
-export async function updateProfile(profileId, updatedBio) {
+export async function updateProfile(profileId, updates) {
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_BASE_URL}/profile/${profileId}/update`,
       {
         method: 'PUT',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          bio: updatedBio || '',
-        }),
+        body: updates,
       },
     );
     return response;
   } catch (error) {
     console.error('Error updating profile', error);
-    throw error;
-  }
-}
-
-export async function updateAvatar(profileId, uploadedFile) {
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/profile/${profileId}/update`,
-      {
-        method: 'PUT',
-        credentials: 'include',
-        body: uploadedFile,
-      },
-    );
-    return response;
-  } catch (error) {
-    console.error('Error uploading avatar', error);
     throw error;
   }
 }
