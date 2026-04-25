@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthProvider';
 import { getProfile, updateProfile } from '../api/apiProfileServices';
 import Button from '../components/Button';
 import FileUploadButton from '../components/FileUploadButton';
+import InfoModal from '../components/InfoModal';
 
 import Avvvatars from 'avvvatars-react';
 
@@ -12,6 +13,8 @@ function Profile() {
   const [bio, setBio] = useState('');
   const [isEditMode, setIsEditMode] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState(null);
 
   useEffect(() => {
     async function getProfileService() {
@@ -50,12 +53,24 @@ function Profile() {
     }
   }
 
+  // Updates the state change for bio
   function handleChange(e) {
     setBio(e.target.value);
   }
 
+  // Closes the modal
+  function handleClose() {
+    setIsOpen(false);
+  }
+
+  // Opens the modal
+  function handleOpen() {
+    setIsOpen(true);
+    setTimeout(handleClose, 2500);
+  }
+
   return (
-    <section className='p-2'>
+    <section className='p-2 relative'>
       <div className='pt-6 flex flex-col justify-center items-center gap-y-8'>
         <span className='relative'>
           {user.avatar === (null || 'NULL') ? (
@@ -75,6 +90,8 @@ function Profile() {
             <FileUploadButton
               setAvatarUrl={setAvatarUrl}
               profileId={user.profile}
+              setModalMessage={setModalMessage}
+              handleOpen={handleOpen}
               customStyle={`p-0.5 absolute -bottom-1.5 -right-1 rounded-full border-2 border-odinbook-dark
                 bg-odinbook-light ${user.id !== profileInfo.id ? 'hidden' : ''}`}
             />
@@ -113,6 +130,8 @@ function Profile() {
           ></textarea>
         )}
       </div>
+
+      <InfoModal isOpen={isOpen} close={handleClose} message={modalMessage} />
     </section>
   );
 }

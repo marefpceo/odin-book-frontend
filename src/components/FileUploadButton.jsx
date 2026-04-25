@@ -3,7 +3,13 @@ import { updateProfile } from '../api/apiProfileServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
-function FileUploadButton({ customStyle, profileId, setAvatarUrl }) {
+function FileUploadButton({
+  customStyle,
+  profileId,
+  setAvatarUrl,
+  setModalMessage,
+  handleOpen,
+}) {
   const fileInputRef = useRef(null);
   const [errors, setErrors] = useState(null);
 
@@ -23,9 +29,14 @@ function FileUploadButton({ customStyle, profileId, setAvatarUrl }) {
     try {
       const response = await updateProfile(profileId, formData);
 
+      const responseData = await response.json();
+
       if (response.status === 200) {
-        const responseData = await response.json();
         setAvatarUrl(responseData.updatedProfile.avatar);
+      }
+      if (response.status === 413) {
+        setModalMessage(responseData.message);
+        handleOpen();
       }
       if (response.status === 500) {
         setErrors(responseData.error.message);
