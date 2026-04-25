@@ -1,26 +1,32 @@
-import { Link } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faComment } from "@fortawesome/free-regular-svg-icons";
+import { Link } from 'react-router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons';
 
-function Card({ postAuthor, postContent, likes, commentCount, avatar }) {
+import Avvvatars from 'avvvatars-react';
+
+function Card({ postAuthor, postContent, likes, commentCount, email, avatar }) {
   return (
-    <div className="p-2 w-full border-b border-odinbook-dark rounded-xs dark:border-darkmode-altDark">
+    <div className='p-2 w-full border-b border-odinbook-dark rounded-xs dark:border-darkmode-altDark'>
       <div>
-        <Link to={"#selectedProfile"} className="flex gap-x-3 items-center">
-          {avatar}
-          <p className="font-bold">{postAuthor}</p>
+        <Link to={'#selectedProfile'} className='flex gap-x-3 items-center'>
+          {avatar !== ('NULL' || null) ? (
+            <img src={avatar} alt='User avatar' width={35} height={35} />
+          ) : (
+            <Avvvatars value={email} shadow={true} size={35} />
+          )}
+          <p className='font-bold'>{postAuthor}</p>
         </Link>
       </div>
-      <div className="py-4">
+      <div className='py-4'>
         <p>{postContent}</p>
       </div>
-      <div className="flex items-center gap-x-4">
-        <span className="flex">
-          <FontAwesomeIcon icon={faThumbsUp} size="lg" />
+      <div className='flex items-center gap-x-4'>
+        <span className='flex'>
+          <FontAwesomeIcon icon={faThumbsUp} size='lg' />
           <p>{likes}</p>
         </span>
-        <span className="flex">
-          <FontAwesomeIcon icon={faComment} size="lg" />
+        <span className='flex'>
+          <FontAwesomeIcon icon={faComment} size='lg' />
           <p>{commentCount}</p>
         </span>
       </div>

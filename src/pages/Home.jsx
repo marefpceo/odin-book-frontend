@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import Card from "../components/Card";
-import { useAuth } from "../contexts/AuthProvider";
-import { getPosts } from "../api/apiPostServices";
+import { useEffect, useState } from 'react';
+import Card from '../components/Card';
+import { useAuth } from '../contexts/AuthProvider';
+import { getPosts } from '../api/apiPostServices';
 
-import Avvvatars from "avvvatars-react";
+import Avvvatars from 'avvvatars-react';
 
 function Home() {
   const { user } = useAuth();
@@ -16,7 +16,6 @@ function Home() {
       const responseData = await response.json();
       if (response.status === 200) {
         setPostList(responseData.feedPosts);
-        console.log(postList);
       } else {
         return;
       }
@@ -24,17 +23,8 @@ function Home() {
     getPostsService();
   }, [user]);
 
-  function processAvatar(avatarInput, emailInput) {
-    if (avatarInput !== "NULL" || null) {
-      return;
-    } else {
-      // use emailInput to create a default avatar return
-      return <Avvvatars value={emailInput} shadow={true} />;
-    }
-  }
-
   return (
-    <section role="main" className="home">
+    <section role='main' className='home'>
       {postList.map((card) => (
         <Card
           key={card.id}
@@ -42,7 +32,8 @@ function Home() {
           postContent={card.content}
           likes={card._count.likes}
           commentCount={card.comment.length}
-          avatar={processAvatar(card.user.profile.avatar, card.user.email)}
+          email={card.user.email}
+          avatar={card.user.profile.avatar}
         />
       ))}
     </section>
