@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { updateProfile } from '../api/apiProfileServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 function FileUploadButton({ customStyle, profileId, setAvatarUrl }) {
   const fileInputRef = useRef(null);
+  const [errors, setErrors] = useState(null);
 
   function handleClick() {
+    setErrors(null);
     fileInputRef.current.click();
   }
 
@@ -21,8 +23,14 @@ function FileUploadButton({ customStyle, profileId, setAvatarUrl }) {
     try {
       const response = await updateProfile(profileId, formData);
 
-      const responseData = await response.json();
-      setAvatarUrl(responseData.updatedProfile.avatar);
+      if (response.status === 200) {
+        const responseData = await response.json();
+        setAvatarUrl(responseData.updatedProfile.avatar);
+      }
+      if (response.status === 500) {
+        setErrors(responseData.error.message);
+        console.log(errors);
+      }
     } catch (error) {
       console.error('Upload Error', error);
     }
