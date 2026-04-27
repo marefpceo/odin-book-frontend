@@ -3,15 +3,13 @@ import Button from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
-function CreatePostForm({ isOpen, handleClose }) {
-  const { user } = useAuth();
-
+function CreatePostForm({ isOpen, handleClose, avatar, username }) {
   return (
     <div
       className={`${isOpen === true ? 'flex' : 'hidden'} absolute top-0 left-0 h-dvh w-full 
       bg-odinbook-light z-40 flex-col items-center`}
     >
-      <div className='relative w-full flex justify-center items-center border-b border-odinbook-altDark'>
+      <div className='relative w-full h-16 flex justify-center items-center border-b border-odinbook-altDark'>
         <FontAwesomeIcon
           icon={faX}
           size='lg'
@@ -21,10 +19,10 @@ function CreatePostForm({ isOpen, handleClose }) {
         <h1 className='py-2 text-lg text-center'>Create A Post</h1>
       </div>
       <div className='mt-9 h-12 px-4 w-full flex gap-x-4 items-center'>
-        <img src={user.avatar} alt='User avatar' width={32} height={32} />
-        {user.username}
+        <img src={avatar} alt='User avatar' width={32} height={32} />
+        {username}
       </div>
-      <form className='flex flex-col gap-y-8 justify-center items-center'>
+      <form className='flex flex-col flex-1 gap-y-8 items-center mt-8'>
         <textarea
           name='postInput'
           id='postInput'

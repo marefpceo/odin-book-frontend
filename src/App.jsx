@@ -36,14 +36,25 @@ function App() {
   }
 
   function handleOpenPostForm() {
-    document.body.classList.add('overflow-hidden');
-    setIsCreatePostOpen(true);
+    if (isCreatePostOpen === true) {
+      return;
+    } else {
+      document.body.classList.add('overflow-hidden');
+      setIsCreatePostOpen(true);
+    }
   }
 
   function handleClosePostForm() {
-    document.body.classList.remove('overflow-hidden');
-    setIsCreatePostOpen(false);
+    if (isCreatePostOpen === false) {
+      return;
+    } else {
+      document.body.classList.remove('overflow-hidden');
+      setIsCreatePostOpen(false);
+    }
   }
+
+  // Handles text area change
+  function handleChange() {}
 
   return (
     <div className='relative grid-rows-[auto_1fr]'>
@@ -51,6 +62,8 @@ function App() {
       <CreatePostForm
         isOpen={isCreatePostOpen}
         handleClose={handleClosePostForm}
+        avatar={user.avatar}
+        username={user.username}
       />
       <Header handleOpen={handleOpen} handleOpenPostForm={handleOpenPostForm} />
       <div className='h-lvh'>
