@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @layer base {
   body {
@@ -41,6 +41,22 @@
     @apply dark:focus:ring-odinbook-altDark;
     @apply dark:focus:border-odinbook-altDark;
   }
+  textarea {
+    @apply border;
+    @apply rounded-xl;
+    @apply border-odinbook-altDark;
+    @apply p-2;
+    @apply outline-0;
+    @apply focus:border-2;
+    @apply focus:border-odinbook-dark;
+    @apply focus:ring-odinbook-dark;
+    @apply placeholder-odinbook-dark;
+    /* Dark mode */
+    @apply dark:placeholder-odinbook-altDark;
+    @apply dark:border-odinbook-dark;
+    @apply dark:focus:ring-odinbook-altDark;
+    @apply dark:focus:border-odinbook-altDark;
+  }
 }
 
 @layer components {
@@ -50,8 +66,8 @@
 }
 
 @theme {
-  --font-logo: "Architects Daughter", cursive;
-  --font-body: "Nunito Sans", sans-serif;
+  --font-logo: 'Architects Daughter', cursive;
+  --font-body: 'Nunito Sans', sans-serif;
   --color-odinbook-dark: #125e9d;
   --color-odinbook-altDark: #7892bc;
   --color-odinbook-light: #f3faff;
