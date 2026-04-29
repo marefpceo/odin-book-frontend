@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useOutletContext } from 'react-router';
 import Card from '../components/Card';
 import { useAuth } from '../contexts/AuthProvider';
 import { getPosts } from '../api/apiPostServices';
@@ -7,6 +8,7 @@ import Avvvatars from 'avvvatars-react';
 
 function Home() {
   const { user } = useAuth();
+  const { refreshPosts } = useOutletContext();
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function Home() {
       }
     }
     getPostsService();
-  }, [user]);
+  }, [user, refreshPosts]);
 
   return (
     <section role='main' className='home'>

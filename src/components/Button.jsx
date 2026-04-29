@@ -1,6 +1,6 @@
-function Button({ text, style, handleClick }) {
+function Button({ text, style, handleClick, isDisabled }) {
   return (
-    <button className={style} onClick={handleClick}>
+    <button className={style} onClick={handleClick} disabled={isDisabled}>
       {text}
     </button>
   );
