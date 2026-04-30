@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserPlus, faUserMinus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUserPlus,
+  faUserCheck,
+  faClockRotateLeft,
+} from '@fortawesome/free-solid-svg-icons';
 
-function UserCard({ avatar, username }) {
+function UserCard({ key, avatar, username, submitFriendRequest, status }) {
   return (
     <>
       <div className='p-2 flex justify-between shadow-[0px_0px_3px_0px] shadow-odinbook-altDark/40 rounded-md'>
@@ -18,9 +22,15 @@ function UserCard({ avatar, username }) {
             className='text-odinbook-dark'
           />
           <FontAwesomeIcon
-            icon={faUserMinus}
+            icon={faUserCheck}
             size='xl'
-            className='text-red-600'
+            className='text-green-500'
+            onClick={submitFriendRequest}
+          />
+          <FontAwesomeIcon
+            icon={faClockRotateLeft}
+            size='xl'
+            className='text-amber-500'
           />
         </div>
       </div>
