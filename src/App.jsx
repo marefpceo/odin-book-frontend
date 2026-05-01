@@ -11,15 +11,14 @@ import { createPostService } from './api/apiPostServices';
 function App() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
-
-  if (!isAuthenticated) {
-    return <Navigate to='/login' replace />;
-  }
-
   const [isOpen, setIsOpen] = useState(false);
   const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
   const [content, setContent] = useState('');
   const [refreshPosts, setRefreshPosts] = useState(false);
+
+  if (!isAuthenticated) {
+    return <Navigate to='/login' replace />;
+  }
 
   // Creates a new post for the current user
   async function createNewPost(userId, content) {
@@ -93,12 +92,17 @@ function App() {
 
   return (
     <div className='relative grid-rows-[auto_1fr]'>
-      <MobileMenu isOpen={isOpen} handleClose={handleClose} />
+      <MobileMenu
+        isOpen={isOpen}
+        handleClose={handleClose}
+        avatar={user.avatar}
+      />
       <CreatePostForm
         isOpen={isCreatePostOpen}
         handleClose={handleClosePostForm}
         avatar={user.avatar}
         username={user.username}
+        email={user.email}
         content={content}
         handleChange={handleChange}
         handleClick={handleFormClick}

@@ -2,12 +2,14 @@ import { useAuth } from '../contexts/AuthProvider';
 import Button from './Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import Avvvatars from 'avvvatars-react';
 
 function CreatePostForm({
   isOpen,
   handleClose,
   avatar,
   username,
+  email,
   content,
   handleChange,
   handleClick,
@@ -27,7 +29,12 @@ function CreatePostForm({
         <h1 className='py-2 text-lg text-center'>Create A Post</h1>
       </div>
       <div className='mt-9 h-12 px-4 w-full flex gap-x-4 items-center'>
-        <img src={avatar} alt='User avatar' width={32} height={32} />
+        {avatar === 'NULL' || null ? (
+          <Avvvatars value={email} shadow={true} size={32} />
+        ) : (
+          <img src={avatar} alt='User avatar' width={32} height={32} />
+        )}
+
         {username}
       </div>
       <form className='flex flex-col flex-1 gap-y-8 items-center mt-8'>

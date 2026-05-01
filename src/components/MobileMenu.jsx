@@ -8,8 +8,9 @@ import {
   faXTwitter,
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
+import Avvvatars from 'avvvatars-react';
 
-function MobileMenu({ isOpen, handleClose }) {
+function MobileMenu({ isOpen, handleClose, avatar }) {
   const navigate = useNavigate();
   const { user, logoutUser } = useAuth();
   // Prevents child div from triggering parent click event
@@ -19,7 +20,7 @@ function MobileMenu({ isOpen, handleClose }) {
 
   function handleClick() {
     logoutUser();
-    navigate('/login', replace);
+    // navigate('/login', replace);
   }
 
   return (
@@ -33,7 +34,12 @@ function MobileMenu({ isOpen, handleClose }) {
         onClick={preventClick}
       >
         <div className='mt-4 p-4 flex items-center gap-x-4 shadow-[0_1px_5px_-1px] shadow-odinbook-altDark dark:bg-darkmode-altDark rounded-md'>
-          <img src={user.avatar} alt='User avatar' width={32} height={32} />
+          {user.avatar === 'NULL' || null ? (
+            <Avvvatars value={user.email} shadow={true} size={32} />
+          ) : (
+            <img src={avatar} alt='User avatar' width={32} height={32} />
+          )}
+
           <p>{user.username}</p>
         </div>
         <div className='flex flex-col flex-1 justify-center items-center'>
