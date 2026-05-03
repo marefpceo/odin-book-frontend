@@ -8,7 +8,7 @@ import {
 function UserCard({ avatar, username, submitFriendRequest, status }) {
   return (
     <>
-      <div className='p-2 flex justify-between shadow-[0px_0px_3px_0px] shadow-odinbook-altDark/40 rounded-md'>
+      <div className='my-4 p-2 flex justify-between shadow-[0px_0px_3px_0px] shadow-odinbook-altDark/40 rounded-md'>
         <div className='flex items-start text-lg gap-x-4'>
           <span className='self-center rounded-full'>{avatar}</span>
           <span>
