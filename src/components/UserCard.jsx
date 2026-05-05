@@ -5,7 +5,7 @@ import {
   faClockRotateLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function UserCard({ avatar, username, submitFriendRequest, status }) {
+function UserCard({ avatar, username, id, handleClick, status }) {
   return (
     <>
       <div className='my-4 p-2 flex justify-between shadow-[0px_0px_3px_0px] shadow-odinbook-altDark/40 rounded-md'>
@@ -16,10 +16,27 @@ function UserCard({ avatar, username, submitFriendRequest, status }) {
           </span>
         </div>
         <div className='mr-1 p-2 flex items-center text-odinbook-dark'>
-          {status === undefined || 'undefined' ? (
+          {status === 'ACTIVE' ? (
+            <FontAwesomeIcon
+              icon={faUserCheck}
+              size='xl'
+              className='text-green-500'
+            />
+          ) : status === 'PENDING' ? (
+            <span className='w-20 py-1 flex flex-col items-center bg-yellow-100 text-yellow-800 rounded-2xl text-sm'>
+              <FontAwesomeIcon
+                icon={faClockRotateLeft}
+                size='1x'
+                className='text-amber-800'
+              />
+              <p className='animate-pulse'>Pending</p>
+            </span>
+          ) : (
             <span
-              className='w-28 py-2 px-3 flex justify-between bg-odinbook-altLight rounded-2xl 
-              shadow-[0_0_2px] shadow-odinbook-altDark'
+              data-id={id}
+              className='w-20 py-2 px-3 flex justify-between bg-odinbook-altLight rounded-2xl 
+              shadow-[0_0_2px] shadow-odinbook-altDark text-sm'
+              onClick={handleClick}
             >
               <p>Add</p>
               <FontAwesomeIcon
@@ -28,19 +45,6 @@ function UserCard({ avatar, username, submitFriendRequest, status }) {
                 className='text-odinbook-dark'
               />
             </span>
-          ) : status === 'PENDING' ? (
-            <FontAwesomeIcon
-              icon={faClockRotateLeft}
-              size='xl'
-              className='text-amber-500'
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={faUserCheck}
-              size='xl'
-              className='text-green-500'
-              onClick={submitFriendRequest}
-            />
           )}
         </div>
       </div>

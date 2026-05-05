@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import UserCard from '../components/UserCard';
 import { useAuth } from '../contexts/AuthProvider';
-import { getUsers } from '../api/apiUserServices';
+import { getUsers, requestFriend } from '../api/apiUserServices';
 import Avvvatar from 'avvvatars-react';
 
 function Users() {
@@ -20,6 +20,27 @@ function Users() {
     }
     getUserListService();
   }, []);
+
+  async function submitFriendRequest(e) {
+    const requestId = e.currentTarget.dataset.id;
+    const response = await requestFriend(user.id, requestId);
+
+    const responseData = await response.json();
+
+    if (response.status === 200) {
+      console.log(responseData.friendRequest);
+    }
+  }
+
+  function processStatus(user1Input, user2Input) {
+    if (user2Input.length > 0) {
+      console.log(user2Input);
+      return user2Input[0].status;
+    }
+    if (user1Input.length > 0) {
+      return user1Input[0].status;
+    }
+  }
 
   return (
     <section className='p-2'>
@@ -41,6 +62,9 @@ function Users() {
               )
             }
             username={obj.username}
+            id={obj.id}
+            handleClick={submitFriendRequest}
+            status={processStatus(obj.user1, obj.user2)}
           />
         ))}
       </div>
