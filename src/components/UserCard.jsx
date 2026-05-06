@@ -23,7 +23,7 @@ function UserCard({
           </span>
         </div>
         <div className='mr-1 p-2 flex items-center text-odinbook-dark'>
-          {status === 'ACTIVE' ? (
+          {status && status.status === 'ACTIVE' ? (
             <FontAwesomeIcon
               icon={faUserCheck}
               size='xl'
@@ -39,8 +39,13 @@ function UserCard({
                 icon={faClockRotateLeft}
                 size='1x'
                 className='text-amber-800'
+                onClick={handleResponseClick}
               />
-              <p className='animate-pulse'>Pending</p>
+              <p
+                className={`${status.isUser1 === true ? 'animate-pulse' : ''}`}
+              >
+                {status.isUser1 === true ? 'Pending' : 'Submitted'}
+              </p>
             </span>
           ) : (
             <span
