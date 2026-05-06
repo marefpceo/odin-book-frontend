@@ -5,7 +5,14 @@ import {
   faClockRotateLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function UserCard({ avatar, username, id, handleClick, status }) {
+function UserCard({
+  avatar,
+  username,
+  id,
+  handleClick,
+  handleResponseClick,
+  status,
+}) {
   // console.log(status);
   return (
     <>
@@ -29,6 +36,7 @@ function UserCard({ avatar, username, id, handleClick, status }) {
                 icon={faClockRotateLeft}
                 size='1x'
                 className='text-amber-800'
+                onClick={handleResponseClick}
               />
               <p
                 className={`${status.isUser1 === true ? 'animate-pulse' : ''}`}

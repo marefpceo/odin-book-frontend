@@ -46,6 +46,10 @@ function Users() {
     }
   }
 
+  function handleResponseClick() {
+    console.log('Click');
+  }
+
   return (
     <section className='p-2'>
       <h1>Users</h1>
