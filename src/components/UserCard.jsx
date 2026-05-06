@@ -5,7 +5,14 @@ import {
   faClockRotateLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-function UserCard({ avatar, username, id, handleClick, status }) {
+function UserCard({
+  avatar,
+  username,
+  id,
+  handleClick,
+  openResponseModal,
+  status,
+}) {
   return (
     <>
       <div className='my-4 p-2 flex justify-between shadow-[0px_0px_3px_0px] shadow-odinbook-altDark/40 rounded-md'>
@@ -23,7 +30,11 @@ function UserCard({ avatar, username, id, handleClick, status }) {
               className='text-green-500'
             />
           ) : status === 'PENDING' ? (
-            <span className='w-20 py-1 flex flex-col items-center bg-yellow-100 text-yellow-800 rounded-2xl text-sm'>
+            <span
+              className='w-20 py-1 flex flex-col items-center bg-yellow-100 text-yellow-800 
+                rounded-2xl text-sm'
+              onClick={openResponseModal}
+            >
               <FontAwesomeIcon
                 icon={faClockRotateLeft}
                 size='1x'

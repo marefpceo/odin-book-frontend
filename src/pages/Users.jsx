@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import UserCard from '../components/UserCard';
+import ResponseModal from '../components/ResponseModal';
 import { useAuth } from '../contexts/AuthProvider';
 import { getUsers, requestFriend } from '../api/apiUserServices';
 import Avvvatar from 'avvvatars-react';
@@ -7,6 +8,7 @@ import Avvvatar from 'avvvatars-react';
 function Users() {
   const { user } = useAuth();
   const [usersList, setUsersList] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     async function getUserListService() {
@@ -32,6 +34,11 @@ function Users() {
     }
   }
 
+  // Updates friendship status
+  async function updateFriendStatus() {
+    //TODO Complete API call for friend status update
+  }
+
   function processStatus(user1Input, user2Input) {
     if (user2Input.length > 0) {
       console.log(user2Input);
@@ -42,8 +49,29 @@ function Users() {
     }
   }
 
+  // Opens ResponseModal
+  function openResponseModal() {
+    if (isOpen === true) {
+      return;
+    } else {
+      setIsOpen(true);
+      document.body.classList.add('overflow-hidden');
+    }
+  }
+
+  // Closes ResponseModal
+  function closeResponseModal() {
+    if (isOpen === false) {
+      return;
+    } else {
+      setIsOpen(false);
+      document.body.classList.remove('overflow-hidden');
+    }
+  }
+
   return (
     <section className='p-2'>
+      <ResponseModal isOpen={isOpen} handleClose={closeResponseModal} />
       <h1>Users</h1>
       <div className='mt-8'>
         {usersList.map((obj) => (
@@ -64,6 +92,7 @@ function Users() {
             username={obj.username}
             id={obj.id}
             handleClick={submitFriendRequest}
+            openResponseModal={openResponseModal}
             status={processStatus(obj.user1, obj.user2)}
           />
         ))}
