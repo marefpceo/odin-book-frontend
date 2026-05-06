@@ -33,12 +33,16 @@ function Users() {
   }
 
   function processStatus(user1Input, user2Input) {
-    if (user2Input.length > 0) {
-      console.log(user2Input);
-      return user2Input[0].status;
-    }
+    const statusObj = {};
     if (user1Input.length > 0) {
-      return user1Input[0].status;
+      statusObj.status = user1Input[0].status;
+      statusObj.isUser1 = true;
+      return statusObj;
+    }
+    if (user2Input.length > 0) {
+      statusObj.status = user2Input[0].status;
+      statusObj.isUser1 = false;
+      return statusObj;
     }
   }
 
