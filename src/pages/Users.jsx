@@ -55,7 +55,10 @@ function Users() {
 
   function handleResponseClick() {
     console.log('Click');
+    // TODO add logic to updateFriendStatus()
   }
+
+  // TODO Add a modal for friend requester to cancel request.
 
   // Opens ResponseModal
   function openResponseModal() {
