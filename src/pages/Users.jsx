@@ -79,7 +79,11 @@ function Users() {
 
   return (
     <section className='p-2'>
-      <ResponseModal isOpen={isOpen} handleClose={closeResponseModal} />
+      <ResponseModal
+        isOpen={isOpen}
+        handleClose={closeResponseModal}
+        handleClick={handleResponseClick}
+      />
       <h1>Users</h1>
       <div className='mt-8'>
         {usersList.map((obj) => (

@@ -29,17 +29,16 @@ function UserCard({
               size='xl'
               className='text-green-500'
             />
-          ) : status === 'PENDING' ? (
+          ) : status && status.status === 'PENDING' ? (
             <span
               className='w-20 py-1 flex flex-col items-center bg-yellow-100 text-yellow-800 
                 rounded-2xl text-sm'
-              onClick={openResponseModal}
+              onClick={status.isUser1 === true ? openResponseModal : undefined}
             >
               <FontAwesomeIcon
                 icon={faClockRotateLeft}
                 size='1x'
                 className='text-amber-800'
-                onClick={handleResponseClick}
               />
               <p
                 className={`${status.isUser1 === true ? 'animate-pulse' : ''}`}
