@@ -32,14 +32,20 @@ function ResponseModal({ isOpen, handleClose, handleClick }) {
             style={
               'w-20 h-7 bg-emerald-500 text-white rounded-md shadow shadow-odinbook-altDark'
             }
-            handleClick={handleClick}
+            handleClick={() => {
+              handleClick('Accept');
+              handleClose();
+            }}
           />
           <Button
             text='Decline'
             style={
               'w-20 bg-rose-500 text-white rounded-md shadow shadow-odinbook-altDark'
             }
-            handleClick={handleClose}
+            handleClick={() => {
+              handleClick('Decline');
+              handleClose();
+            }}
           />
         </div>
       </div>

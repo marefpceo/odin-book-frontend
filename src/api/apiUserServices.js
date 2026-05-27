@@ -50,7 +50,7 @@ export async function updateFriendship(userId, friendId, status) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user1Id: userId,
+          friendId: friendId,
           status: status,
         }),
       },
@@ -58,6 +58,29 @@ export async function updateFriendship(userId, friendId, status) {
     return response;
   } catch (error) {
     console.error('Error updating friendship status', error);
+    throw error;
+  }
+}
+
+// Delete friendship record for declined and removed friendships
+export async function removeFriendship(userId, friendId) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/users/${userId}/remove`,
+      {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          friendId: friendId,
+        }),
+      },
+    );
+    return response;
+  } catch (error) {
+    console.error('Error removing friendship', error);
     throw error;
   }
 }

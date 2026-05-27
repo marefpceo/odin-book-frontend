@@ -2,15 +2,25 @@ import { useEffect, useState } from 'react';
 import UserCard from '../components/UserCard';
 import ResponseModal from '../components/ResponseModal';
 import { useAuth } from '../contexts/AuthProvider';
-import { getUsers, requestFriend } from '../api/apiUserServices';
+import {
+  getUsers,
+  requestFriend,
+  updateFriendship,
+  removeFriendship,
+} from '../api/apiUserServices';
 import Avvvatar from 'avvvatars-react';
 
 function Users() {
   const { user } = useAuth();
   const [usersList, setUsersList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [friendId, setFriendId] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
+    if (refresh === true) {
+      setRefresh(false);
+    }
     async function getUserListService() {
       const response = await getUsers();
 
@@ -21,7 +31,7 @@ function Users() {
       }
     }
     getUserListService();
-  }, []);
+  }, [refresh]);
 
   async function submitFriendRequest(e) {
     const requestId = e.currentTarget.dataset.id;
@@ -35,8 +45,26 @@ function Users() {
   }
 
   // Updates friendship status
-  async function updateFriendStatus() {
-    //TODO Complete API call for friend status update
+  async function updateFriendStatus(status) {
+    const response = await updateFriendship(user.id, friendId, status);
+
+    const responseData = await response.json();
+
+    if (response.status === 200) {
+      setFriendId(null);
+      setRefresh(true);
+    }
+  }
+
+  // Remove submitted friendship request
+  async function removeFriendRequest() {
+    const response = await removeFriendship(user.id, friendId);
+    const responseData = await response.json();
+
+    if (response.status === 200) {
+      setFriendId(null);
+      setRefresh(true);
+    }
   }
 
   function processStatus(user1Input, user2Input) {
@@ -53,19 +81,26 @@ function Users() {
     }
   }
 
-  function handleResponseClick() {
-    console.log('Click');
-    // TODO add logic to updateFriendStatus()
+  function handleResponseModalClick(responseInput) {
+    if (responseInput === 'Accept') {
+      updateFriendStatus('ACTIVE');
+    }
+
+    if (responseInput === 'Decline') {
+      removeFriendRequest();
+    }
   }
 
   // TODO Add a modal for friend requester to cancel request.
 
   // Opens ResponseModal
-  function openResponseModal() {
+  function openResponseModal(e) {
+    const target = e.currentTarget.dataset.id;
     if (isOpen === true) {
       return;
     } else {
       setIsOpen(true);
+      setFriendId(target);
       document.body.classList.add('overflow-hidden');
     }
   }
@@ -85,7 +120,7 @@ function Users() {
       <ResponseModal
         isOpen={isOpen}
         handleClose={closeResponseModal}
-        handleClick={handleResponseClick}
+        handleClick={handleResponseModalClick}
       />
       <h1>Users</h1>
       <div className='mt-8'>
