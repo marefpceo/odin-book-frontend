@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import UserCard from '../components/UserCard';
 import ResponseModal from '../components/ResponseModal';
+import CancelModal from '../components/CancelModal';
 import { useAuth } from '../contexts/AuthProvider';
 import {
   getUsers,
@@ -13,7 +14,8 @@ import Avvvatar from 'avvvatars-react';
 function Users() {
   const { user } = useAuth();
   const [usersList, setUsersList] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isResponseOpen, setIsResponseOpen] = useState(false);
+  const [isCancelOpen, setIsCancelOpen] = useState(false);
   const [friendId, setFriendId] = useState(null);
   const [refresh, setRefresh] = useState(false);
 
@@ -40,7 +42,7 @@ function Users() {
     const responseData = await response.json();
 
     if (response.status === 200) {
-      console.log(responseData.friendRequest);
+      setRefresh(true);
     }
   }
 
@@ -48,6 +50,17 @@ function Users() {
   async function updateFriendStatus(status) {
     const response = await updateFriendship(user.id, friendId, status);
 
+    const responseData = await response.json();
+
+    if (response.status === 200) {
+      setFriendId(null);
+      setRefresh(true);
+    }
+  }
+
+  // Cancels submitted friendship request by requesting user
+  async function cancelFriendRequest() {
+    const response = await removeFriendship(friendId, user.id);
     const responseData = await response.json();
 
     if (response.status === 200) {
@@ -81,6 +94,17 @@ function Users() {
     }
   }
 
+  function handleCancelModalClick(responseInput) {
+    if (responseInput === 'Withdraw') {
+      cancelFriendRequest();
+      setRefresh(true);
+    }
+
+    if (responseInput === 'Cancel') {
+      closeCancelModal();
+    }
+  }
+
   function handleResponseModalClick(responseInput) {
     if (responseInput === 'Accept') {
       updateFriendStatus('ACTIVE');
@@ -91,15 +115,35 @@ function Users() {
     }
   }
 
-  // TODO Add a modal for friend requester to cancel request.
+  // Opens CancelModal
+  function openCancelModal(e) {
+    const target = e.currentTarget.dataset.id;
+    if (isCancelOpen === true) {
+      return;
+    } else {
+      setIsCancelOpen(true);
+      setFriendId(target);
+      document.body.classList.add('overflow-hidden');
+    }
+  }
+
+  // Closes CancelModal
+  function closeCancelModal() {
+    if (isCancelOpen === false) {
+      return;
+    } else {
+      setIsCancelOpen(false);
+      document.body.classList.remove('overflow-hidden');
+    }
+  }
 
   // Opens ResponseModal
   function openResponseModal(e) {
     const target = e.currentTarget.dataset.id;
-    if (isOpen === true) {
+    if (isResponseOpen === true) {
       return;
     } else {
-      setIsOpen(true);
+      setIsResponseOpen(true);
       setFriendId(target);
       document.body.classList.add('overflow-hidden');
     }
@@ -107,10 +151,10 @@ function Users() {
 
   // Closes ResponseModal
   function closeResponseModal() {
-    if (isOpen === false) {
+    if (isResponseOpen === false) {
       return;
     } else {
-      setIsOpen(false);
+      setIsResponseOpen(false);
       document.body.classList.remove('overflow-hidden');
     }
   }
@@ -118,9 +162,14 @@ function Users() {
   return (
     <section className='p-2'>
       <ResponseModal
-        isOpen={isOpen}
+        isOpen={isResponseOpen}
         handleClose={closeResponseModal}
         handleClick={handleResponseModalClick}
+      />
+      <CancelModal
+        isOpen={isCancelOpen}
+        handleClose={closeCancelModal}
+        handleClick={handleCancelModalClick}
       />
       <h1>Users</h1>
       <div className='mt-8'>
@@ -143,6 +192,7 @@ function Users() {
             id={obj.id}
             handleClick={submitFriendRequest}
             openResponseModal={openResponseModal}
+            openCancelModal={openCancelModal}
             status={processStatus(obj.user1, obj.user2)}
           />
         ))}

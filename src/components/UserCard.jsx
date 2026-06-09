@@ -11,6 +11,7 @@ function UserCard({
   id,
   handleClick,
   openResponseModal,
+  openCancelModal,
   status,
 }) {
   return (
@@ -34,7 +35,9 @@ function UserCard({
               data-id={id}
               className='w-20 py-1 flex flex-col items-center bg-yellow-100 text-yellow-800 
                 rounded-2xl text-sm'
-              onClick={status.isUser1 === true ? openResponseModal : undefined}
+              onClick={
+                status.isUser1 === true ? openResponseModal : openCancelModal
+              }
             >
               <FontAwesomeIcon
                 icon={faClockRotateLeft}
