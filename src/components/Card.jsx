@@ -4,7 +4,17 @@ import { faThumbsUp, faComment } from '@fortawesome/free-regular-svg-icons';
 
 import Avvvatars from 'avvvatars-react';
 
-function Card({ postAuthor, postContent, likes, commentCount, email, avatar }) {
+function Card({
+  postId,
+  postAuthor,
+  postContent,
+  likes,
+  commentCount,
+  email,
+  avatar,
+  handleLikeClick,
+  handleCommentClick,
+}) {
   return (
     <div className='p-2 w-full border-b border-odinbook-dark rounded-xs dark:border-darkmode-altDark'>
       <div>
@@ -21,11 +31,11 @@ function Card({ postAuthor, postContent, likes, commentCount, email, avatar }) {
         <p>{postContent}</p>
       </div>
       <div className='flex items-center gap-x-4'>
-        <span className='flex'>
+        <span className='flex' onClick={handleLikeClick} data-id={postId}>
           <FontAwesomeIcon icon={faThumbsUp} size='lg' />
           <p>{likes === 0 ? '' : likes}</p>
         </span>
-        <span className='flex'>
+        <span className='flex' onClick={handleCommentClick} data-id={postId}>
           <FontAwesomeIcon icon={faComment} size='lg' />
           <p>{commentCount === 0 ? '' : commentCount}</p>
         </span>
