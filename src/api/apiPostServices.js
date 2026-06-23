@@ -38,3 +38,22 @@ export async function createPostService(userId, content) {
     throw error;
   }
 }
+
+export async function createLikeRecord(userId, postId) {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/posts/${userId}/${postId}/like`,
+      {
+        method: 'PUT',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    return response;
+  } catch (error) {
+    console.error('Error creating like record', error);
+    throw error;
+  }
+}

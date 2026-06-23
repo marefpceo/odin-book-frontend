@@ -112,6 +112,7 @@ function App() {
         <Outlet
           context={{
             refreshPosts,
+            setRefreshPosts,
           }}
         />
       </div>

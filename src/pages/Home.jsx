@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router';
 import Card from '../components/Card';
 import { useAuth } from '../contexts/AuthProvider';
-import { getPosts } from '../api/apiPostServices';
+import { getPosts, createLikeRecord } from '../api/apiPostServices';
 
 import Avvvatars from 'avvvatars-react';
 
 function Home() {
   const { user } = useAuth();
-  const { refreshPosts } = useOutletContext();
+  const { refreshPosts, setRefreshPosts } = useOutletContext();
   const [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -25,9 +25,18 @@ function Home() {
     getPostsService();
   }, [user, refreshPosts]);
 
+  async function createLikeRecordService(postId) {
+    const response = await createLikeRecord(user.id, postId);
+    const responseData = await response.json();
+    if (response.status === 200) {
+      setRefreshPosts(true);
+    }
+  }
+
   // Gets post id and call function to create a like record
   function handleLikeClick(e) {
     const postId = e.currentTarget.dataset.id;
+    createLikeRecordService(postId);
     console.log('like click' + postId);
   }
 
