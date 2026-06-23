@@ -23,11 +23,11 @@ function Card({ postAuthor, postContent, likes, commentCount, email, avatar }) {
       <div className='flex items-center gap-x-4'>
         <span className='flex'>
           <FontAwesomeIcon icon={faThumbsUp} size='lg' />
-          <p>{likes}</p>
+          <p>{likes === 0 ? '' : likes}</p>
         </span>
         <span className='flex'>
           <FontAwesomeIcon icon={faComment} size='lg' />
-          <p>{commentCount}</p>
+          <p>{commentCount === 0 ? '' : commentCount}</p>
         </span>
       </div>
     </div>
