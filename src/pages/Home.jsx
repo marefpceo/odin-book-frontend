@@ -25,17 +25,30 @@ function Home() {
     getPostsService();
   }, [user, refreshPosts]);
 
+  // Gets post id and call function to create a like record
+  function handleLikeClick(e) {
+    const postId = e.currentTarget.dataset.id;
+    console.log('like click' + postId);
+  }
+
+  function handleCommentClick(e) {
+    console.log('comment click');
+  }
+
   return (
     <section role='main' className='home'>
-      {postList.map((card) => (
+      {postList.map((post) => (
         <Card
-          key={card.id}
-          postAuthor={card.user.username}
-          postContent={card.content}
-          likes={card._count.likes}
-          commentCount={card.comment.length}
-          email={card.user.email}
-          avatar={card.user.profile.avatar}
+          key={post.id}
+          postId={post.id}
+          postAuthor={post.user.username}
+          postContent={post.content}
+          likes={post._count.likes}
+          commentCount={post.comment.length}
+          email={post.user.email}
+          avatar={post.user.profile.avatar}
+          handleLikeClick={handleLikeClick}
+          handleCommentClick={handleCommentClick}
         />
       ))}
     </section>
