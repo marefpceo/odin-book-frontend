@@ -46,7 +46,8 @@ function Home() {
     console.log('comment click');
   }
 
-  function handleOpenCommentModal() {
+  function handleOpenCommentModal(e) {
+    const postId = e.currentTarget.dataset.id;
     if (isCommentModalOpen === true) {
       return;
     } else {
@@ -65,27 +66,29 @@ function Home() {
   }
 
   return (
-    <section role='main' className='home'>
+    <>
       <CommentModal
         isOpen={isCommentModalOpen}
         close={handleCloseCommentModal}
       />
-      {postList.map((post) => (
-        <Card
-          key={post.id}
-          postId={post.id}
-          postAuthor={post.user.username}
-          postContent={post.content}
-          likes={post._count.likes}
-          commentCount={post.comment.length}
-          email={post.user.email}
-          avatar={post.user.profile.avatar}
-          handleLikeClick={handleLikeClick}
-          handleCommentClick={handleCommentClick}
-          openCommentModal={handleOpenCommentModal}
-        />
-      ))}
-    </section>
+      <section role='main' className='home'>
+        {postList.map((post) => (
+          <Card
+            key={post.id}
+            postId={post.id}
+            postAuthor={post.user.username}
+            postContent={post.content}
+            likes={post._count.likes}
+            commentCount={post.comment.length}
+            email={post.user.email}
+            avatar={post.user.profile.avatar}
+            handleLikeClick={handleLikeClick}
+            handleCommentClick={handleCommentClick}
+            openCommentModal={handleOpenCommentModal}
+          />
+        ))}
+      </section>
+    </>
   );
 }
 
