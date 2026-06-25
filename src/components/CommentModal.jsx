@@ -30,7 +30,7 @@ function CommentModal({ isOpen, close, comments }) {
           placeholder='Write a comment'
           className='peer w-full h-12 resize-none placeholder-odinbook-altDark'
         />
-        <span className='hidden m-2 p-2 peer-focus:block self-end bg-odinbook-altDark/25 rounded-full'>
+        <span className='hidden m-2 p-2 w-16 peer-focus:flex justify-center self-center bg-odinbook-altDark/25 rounded-2xl'>
           <FontAwesomeIcon icon={faPaperPlane} size='md' />
         </span>
       </div>
