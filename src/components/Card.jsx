@@ -14,6 +14,7 @@ function Card({
   avatar,
   handleLikeClick,
   handleCommentClick,
+  openCommentModal,
 }) {
   return (
     <div className='p-2 w-full border-b border-odinbook-dark rounded-xs dark:border-darkmode-altDark'>
@@ -35,7 +36,7 @@ function Card({
           <FontAwesomeIcon icon={faThumbsUp} size='lg' />
           <p>{likes === 0 ? '' : likes}</p>
         </span>
-        <span className='flex' onClick={handleCommentClick} data-id={postId}>
+        <span className='flex' onClick={openCommentModal} data-id={postId}>
           <FontAwesomeIcon icon={faComment} size='lg' />
           <p>{commentCount === 0 ? '' : commentCount}</p>
         </span>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext } from 'react-router';
 import Card from '../components/Card';
+import CommentModal from '../components/CommentModal';
 import { useAuth } from '../contexts/AuthProvider';
 import { getPosts, createLikeRecord } from '../api/apiPostServices';
 
@@ -10,6 +11,7 @@ function Home() {
   const { user } = useAuth();
   const { refreshPosts, setRefreshPosts } = useOutletContext();
   const [postList, setPostList] = useState([]);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
 
   useEffect(() => {
     async function getPostsService() {
@@ -44,8 +46,30 @@ function Home() {
     console.log('comment click');
   }
 
+  function handleOpenCommentModal() {
+    if (isCommentModalOpen === true) {
+      return;
+    } else {
+      document.body.classList.add('overflow-hidden');
+      setIsCommentModalOpen(true);
+    }
+  }
+
+  function handleCloseCommentModal() {
+    if (isCommentModalOpen === false) {
+      return;
+    } else {
+      document.body.classList.add('overflow-hidden');
+      setIsCommentModalOpen(false);
+    }
+  }
+
   return (
     <section role='main' className='home'>
+      <CommentModal
+        isOpen={isCommentModalOpen}
+        close={handleCloseCommentModal}
+      />
       {postList.map((post) => (
         <Card
           key={post.id}
@@ -58,6 +82,7 @@ function Home() {
           avatar={post.user.profile.avatar}
           handleLikeClick={handleLikeClick}
           handleCommentClick={handleCommentClick}
+          openCommentModal={handleOpenCommentModal}
         />
       ))}
     </section>
